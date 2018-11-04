@@ -19,9 +19,10 @@
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/editText"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.564"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.033"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@mipmap/ic_launcher_background"
         tools:ignore="VectorDrawableCompat" />
 
@@ -91,7 +92,8 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="#2D51A3"
-            android:text="Register" />
+            android:text="Register"
+            android:onClick="onClickReg"/>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
