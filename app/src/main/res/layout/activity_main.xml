@@ -9,20 +9,20 @@
 
     <ImageView
         android:id="@+id/Logo"
-        android:layout_width="228dp"
-        android:layout_height="127dp"
+        android:layout_width="240dp"
+        android:layout_height="187dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/editText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.564"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.562"
         app:srcCompat="@mipmap/ic_launcher_background"
         tools:ignore="VectorDrawableCompat" />
 
@@ -81,8 +81,9 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:background="#2D51A3"
-            android:text="Login" />
+            android:background="@drawable/rounded_button"
+            android:text="Login"
+            />
 
         <Button
             android:id="@+id/button6"
@@ -91,7 +92,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:background="#2D51A3"
+            android:background="@drawable/rounded_button"
             android:text="Register"
             android:onClick="onClickReg"/>
     </LinearLayout>
