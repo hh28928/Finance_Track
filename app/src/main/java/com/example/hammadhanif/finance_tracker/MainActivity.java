@@ -17,7 +17,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private FirebaseAuth mAuth;
     Button login_button;
     ProgressDialog progressDialog;
@@ -28,46 +28,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        edit_user = findViewById(R.id.username);
-        edit_pass = findViewById(R.id.password);
-
-        progressDialog = new ProgressDialog(this);
-        login_button = findViewById(R.id.login);
-
-
-        login_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickLogin();
-            }
-        });
+        findViewById(R.id.register).setOnClickListener(this);
     }
 
-    public void onClickLogin() {
-        progressDialog.setMessage("Signing In");
-        String username_string = edit_user.getText().toString();
-        String password_string = edit_pass.getText().toString();
-
-        mAuth = FirebaseAuth.getInstance();
-        mAuth.signInWithEmailAndPassword(username_string, password_string)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Log.d("TAG", "signInWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                        } else {
-                            Log.w("TAG", "signInWithEmail:failure", task.getException());
-                            Toast.makeText(MainActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-
-    }
-
-    public void onClickReg(View view) {
-        Intent regIntent = new Intent(this, Registration_Activity.class);
-        startActivity(regIntent);
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.register:
+                startActivity(new Intent(this,Registration_Activity.class));
+                break;
+        }
     }
 }

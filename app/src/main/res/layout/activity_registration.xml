@@ -4,23 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Registration_Activity">
+    tools:context=".Registration_Activity"
+    tools:layout_editor_absoluteY="81dp">
 
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_height="512dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.529">
 
         <ImageView
             android:id="@+id/imageView"
@@ -31,85 +30,22 @@
             tools:ignore="VectorDrawableCompat" />
 
         <EditText
-            android:id="@+id/name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:textSize="12dp"
-            android:hint="Full Name"
-            android:inputType="textPersonName" />
-
-        <EditText
             android:id="@+id/email"
-            android:layout_width="match_parent"
+            android:layout_width="315dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:textSize="12dp"
             android:hint="Email"
-            android:inputType="textPersonName" />
+            android:inputType="textEmailAddress"
+            android:textSize="12dp" />
 
         <EditText
             android:id="@+id/password"
-            android:layout_width="match_parent"
+            android:layout_width="315dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:textSize="12dp"
             android:hint="Password"
-            android:inputType="textPassword" />
-
-        <EditText
-            android:id="@+id/address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:textSize="12dp"
-            android:hint="Address"
-            android:inputType="textPersonName" />
-
-        <EditText
-            android:id="@+id/city"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:textSize="12dp"
-            android:hint="City"
-            android:inputType="textPersonName" />
-
-        <EditText
-            android:id="@+id/state"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:textSize="12dp"
-            android:inputType="textPersonName"
-            android:hint="State" />
-
-        <EditText
-            android:id="@+id/zip_code"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:textSize="12dp"
-            android:hint="Zip Code"
-            android:inputType="textPersonName" />
-
-        <EditText
-            android:id="@+id/country"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:textSize="12dp"
-            android:hint="Country"
-            android:inputType="textPersonName" />
-
-        <EditText
-            android:id="@+id/phone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:textSize="12dp"
-            android:hint="Phone Number"
-            android:inputType="textPersonName" />
+            android:inputType="textPassword"
+            android:textSize="12dp" />
 
         <Button
             android:id="@+id/registration"
@@ -118,8 +54,18 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:background="#2D51A3"
-            android:gravity="center"
             android:text="Register"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:id="@+id/loginR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:background="#2D51A3"
+            android:gravity="center"
+            android:text="Login"
             android:textColor="#ffffff" />
 
 

@@ -83,6 +83,7 @@
             android:layout_weight="1"
             android:background="@drawable/rounded_button"
             android:text="Login"
+            android:textColor="#ffffff"
             />
 
         <Button
@@ -94,7 +95,8 @@
             android:layout_weight="1"
             android:background="@drawable/rounded_button"
             android:text="Register"
-            android:onClick="onClickReg"/>
+            android:onClick="onClickReg"
+            android:textColor="#ffffff"/>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
