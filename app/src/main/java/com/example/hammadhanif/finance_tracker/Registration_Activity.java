@@ -20,30 +20,93 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class Registration_Activity extends AppCompatActivity implements View.OnClickListener {
+public class Registration_Activity extends AppCompatActivity {
 
     EditText edit_full_name, edit_email, edit_pass, edit_address, edit_city, edit_state;
     EditText edit_zipcode, edit_country, edit_phone_number;
-    //ProgressBar progressBar;
-
+    Button btnregister, btnback;
+    String email, name, password;
     private FirebaseAuth mAuth;
+    //private FirebaseStorage firebaseStorage;
+    //private StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        edit_email = findViewById(R.id.email);
-        edit_pass = findViewById(R.id.password);
+        setupUIViews();
 
-        //progressBar = (ProgressBar) findViewById(R.id.progressbar);
         mAuth = FirebaseAuth.getInstance();
 
-        findViewById(R.id.registration).setOnClickListener(this);
-        findViewById(R.id.loginR).setOnClickListener(this);
+        btnregister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(validate()){
+                    //Upload data to the database
+                    String user_email = edit_email.getText().toString().trim();
+                    String user_password = edit_pass.getText().toString().trim();
+
+                    mAuth.createUserWithEmailAndPassword(user_email, user_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+
+                            if(task.isSuccessful()){
+                                //sendEmailVerification();
+                                //sendUserData();
+                                //firebaseAuth.signOut();
+                                Toast.makeText(Registration_Activity.this, "Successfully Registered, Upload complete!", Toast.LENGTH_SHORT).show();
+                                finish();
+                                startActivity(new Intent(Registration_Activity.this, MainActivity.class));
+                            }else{
+                                Toast.makeText(Registration_Activity.this, "Registration Failed", Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
+                    });
+                }
+            }
+        });
+
+        btnback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Registration_Activity.this, MainActivity.class));
+            }
+        });
+
     }
 
-    private void registerUser() {
+
+
+    private void setupUIViews(){
+        //edit_name = (EditText)findViewById(R.id.edit_full_name);
+        edit_pass = (EditText)findViewById(R.id.password);
+        edit_email = (EditText)findViewById(R.id.email);
+        btnregister = (Button)findViewById(R.id.registration);
+        btnback = (Button)findViewById(R.id.back);
+
+    }
+
+    private Boolean validate(){
+        Boolean result = false;
+
+        //name = edit_name.getText().toString();
+        password = edit_pass.getText().toString();
+        email = edit_email.getText().toString();
+
+
+        if(/*name.isEmpty() ||*/ password.isEmpty() || email.isEmpty()){
+            Toast.makeText(this, "Please enter all the details", Toast.LENGTH_SHORT).show();
+        }else{
+            result = true;
+        }
+
+        return result;
+    }
+}
+
+   /* private void registerUser() {
         String email = edit_email.getText().toString().trim();
         String password = edit_pass.getText().toString().trim();
 
@@ -53,12 +116,6 @@ public class Registration_Activity extends AppCompatActivity implements View.OnC
             return;
         }
 
-        /*if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            edit_email.setError("Please enter a valid email");
-            edit_email.requestFocus();
-            return;
-        }
-*/
         if (password.isEmpty()) {
             edit_pass.setError("Email is required");
             edit_pass.requestFocus();
@@ -73,7 +130,7 @@ public class Registration_Activity extends AppCompatActivity implements View.OnC
 
         //progressBar.setVisibility(View.VISIBLE);
 
-        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+       mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
@@ -92,6 +149,7 @@ public class Registration_Activity extends AppCompatActivity implements View.OnC
 
 
     }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()){
@@ -99,10 +157,11 @@ public class Registration_Activity extends AppCompatActivity implements View.OnC
                 registerUser();
                 break;
 
-            case R.id.loginR:
+            case R.id.back:
                 startActivity(new Intent(this, MainActivity.class));
                 break;
 
         }
     }
 }
+*/
