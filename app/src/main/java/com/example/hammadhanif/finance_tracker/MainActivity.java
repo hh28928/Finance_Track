@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         Info.setText("No of attempts remaining: 5");
 
         mAuth = FirebaseAuth.getInstance();
-        //progressDialog = new ProgressDialog(this);
+        progressDialog = new ProgressDialog(this);
 
         FirebaseUser user = mAuth.getCurrentUser();
 
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void validate(String userName, String userPassword) {
 
-        progressDialog.setMessage("You can subscribe to my channel until you are verified!");
+        progressDialog.setMessage("Message");
         progressDialog.show();
 
         mAuth.signInWithEmailAndPassword(userName, userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
