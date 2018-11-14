@@ -25,12 +25,14 @@ public class MenuActivity extends AppCompatActivity {
     private Button logout;
     TextView welcome;
     Button bt_Budget;
+    Button salary;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
 
         bt_Budget = findViewById(R.id.cBudget);
+        salary = findViewById(R.id.salary);
         welcome = findViewById(R.id.welcome_text);
         mAuth = FirebaseAuth.getInstance();
 
@@ -52,6 +54,14 @@ public class MenuActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent cIntent = new Intent(MenuActivity.this, CreateActivity.class);
                 startActivity(cIntent);
+            }
+        });
+
+        salary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sIntent = new Intent(MenuActivity.this, SalaryActivity.class);
+                startActivity(sIntent);
             }
         });
     }
