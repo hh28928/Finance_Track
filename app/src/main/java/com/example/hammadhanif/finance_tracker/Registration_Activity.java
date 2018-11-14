@@ -27,8 +27,6 @@ public class Registration_Activity extends AppCompatActivity {
     Button btnregister, btnback;
     String email, name, password;
     private FirebaseAuth mAuth;
-    //private FirebaseStorage firebaseStorage;
-    //private StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +78,6 @@ public class Registration_Activity extends AppCompatActivity {
 
 
     private void setupUIViews(){
-        //edit_name = (EditText)findViewById(R.id.edit_full_name);
         edit_pass = (EditText)findViewById(R.id.password);
         edit_email = (EditText)findViewById(R.id.email);
         btnregister = (Button)findViewById(R.id.registration);
@@ -91,12 +88,11 @@ public class Registration_Activity extends AppCompatActivity {
     private Boolean validate(){
         Boolean result = false;
 
-        //name = edit_name.getText().toString();
         password = edit_pass.getText().toString();
         email = edit_email.getText().toString();
 
 
-        if(/*name.isEmpty() ||*/ password.isEmpty() || email.isEmpty()){
+        if(password.isEmpty() || email.isEmpty()){
             Toast.makeText(this, "Please enter all the details", Toast.LENGTH_SHORT).show();
         }else{
             result = true;
