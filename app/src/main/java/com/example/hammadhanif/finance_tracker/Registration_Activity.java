@@ -19,6 +19,8 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Registration_Activity extends AppCompatActivity {
 
@@ -27,6 +29,7 @@ public class Registration_Activity extends AppCompatActivity {
     Button btnregister, btnback;
     String email, name, password;
     private FirebaseAuth mAuth;
+    private DatabaseReference databaseReference; // store data to firebase
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,7 @@ public class Registration_Activity extends AppCompatActivity {
         setupUIViews();
 
         mAuth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference();
 
         btnregister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,9 +54,7 @@ public class Registration_Activity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
 
                             if(task.isSuccessful()){
-                                //sendEmailVerification();
-                                //sendUserData();
-                                //firebaseAuth.signOut();
+                                saveUserinformation(); // Saves the data
                                 Toast.makeText(Registration_Activity.this, "Successfully Registered, Upload complete!", Toast.LENGTH_SHORT).show();
                                 finish();
                                 startActivity(new Intent(Registration_Activity.this, MainActivity.class));
@@ -80,9 +82,34 @@ public class Registration_Activity extends AppCompatActivity {
     private void setupUIViews(){
         edit_pass = (EditText)findViewById(R.id.password);
         edit_email = (EditText)findViewById(R.id.email);
+
+        // info storing in firebase
+        edit_full_name = (EditText)findViewById(R.id.full_name);
+        edit_address = (EditText)findViewById(R.id.address);
+        edit_city = (EditText)findViewById(R.id.city);
+        edit_state = (EditText)findViewById(R.id.state);
+        edit_zipcode = (EditText)findViewById(R.id.zip_code);
+        edit_country = (EditText)findViewById(R.id.country);
+
+
         btnregister = (Button)findViewById(R.id.registration);
         btnback = (Button)findViewById(R.id.back);
 
+    }
+    // writing data to database
+    private void saveUserinformation(){
+
+        String name = edit_full_name.getText().toString().trim();
+        String add = edit_address.getText().toString().trim();
+        String city = edit_city.getText().toString().trim();
+        String state = edit_state.getText().toString().trim();
+        String zip = edit_zipcode.getText().toString().trim();
+        String country = edit_country.getText().toString().trim();
+
+        UserInformation userInformation = new UserInformation(name,add,city,state,zip,country);
+        FirebaseUser user = mAuth.getCurrentUser();
+        databaseReference.child(user.getUid()).setValue(userInformation);
+        Toast.makeText(this,"Information Saved ...",Toast.LENGTH_SHORT).show();
     }
 
     private Boolean validate(){

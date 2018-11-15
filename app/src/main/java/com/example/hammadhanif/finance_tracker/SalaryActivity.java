@@ -44,15 +44,18 @@ public class SalaryActivity extends AppCompatActivity {
             public void onClick(View v) {
                 int radioId = radioGroup.getCheckedRadioButtonId();
                 radioButton = findViewById(radioId);
-                int num = Integer.parseInt(rateInput.getText().toString());
-
+                double num = Double.parseDouble(rateInput.getText().toString());
+                double hourYearly = num * 40 * 52;
+                String hYear = String.format("$%,.2f", hourYearly);
+                double monthYearly = num * 12;
+                String mYear = String.format("$%,.2f", monthYearly);
                 rate.setText(""+radioId);
 
                 if(radioButton.getText().equals("Hourly Rate")){
-                    rate.setText("" + num * 40 * 52);
+                    rate.setText(hYear);
                 }
                 else {
-                    rate.setText("" + num * 12);
+                    rate.setText(mYear);
                     }
 
             }
