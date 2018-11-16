@@ -1,40 +1,45 @@
 package com.example.hammadhanif.finance_tracker;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import com.basgeekball.awesomevalidation.AwesomeValidation;
+import com.basgeekball.awesomevalidation.ValidationStyle;
+import com.basgeekball.awesomevalidation.utility.RegexTemplate;
+
+import java.util.regex.Pattern;
+
 public class Registration_Activity extends AppCompatActivity {
 
-    EditText edit_full_name, edit_email, edit_pass, edit_address, edit_city, edit_state;
+    EditText edit_full_name, edit_email, edit_pass, edit_cpass, edit_address, edit_city, edit_state;
     EditText edit_zipcode, edit_country, edit_phone_number;
     Button btnregister, btnback;
     String email, name, password;
     private FirebaseAuth mAuth;
     private DatabaseReference databaseReference; // store data to firebase
+    AwesomeValidation awesomeValidation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+        awesomeValidation = new AwesomeValidation(ValidationStyle.BASIC);
+
 
         setupUIViews();
 
@@ -44,7 +49,7 @@ public class Registration_Activity extends AppCompatActivity {
         btnregister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(validate()){
+                if(awesomeValidation.validate()){
                     //Upload data to the database
                     String user_email = edit_email.getText().toString().trim();
                     String user_password = edit_pass.getText().toString().trim();
@@ -65,6 +70,9 @@ public class Registration_Activity extends AppCompatActivity {
                         }
                     });
                 }
+                else {
+                    Toast.makeText(Registration_Activity.this, "Error", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -77,10 +85,9 @@ public class Registration_Activity extends AppCompatActivity {
 
     }
 
-
-
     private void setupUIViews(){
         edit_pass = (EditText)findViewById(R.id.password);
+        edit_cpass = (EditText)findViewById(R.id.cpassword);
         edit_email = (EditText)findViewById(R.id.email);
 
         // info storing in firebase
@@ -94,6 +101,13 @@ public class Registration_Activity extends AppCompatActivity {
 
         btnregister = (Button)findViewById(R.id.registration);
         btnback = (Button)findViewById(R.id.back);
+
+        String regexPassword = "(?=.*[a-z])(?=.*[A-Z])(?=.*[\\d])(?=.*[~`!@#\\$%\\^&\\*\\(\\)\\-_\\+=\\{\\}\\[\\]\\|\\;:\"<>,./\\?]).{8,}";
+        awesomeValidation.addValidation(Registration_Activity.this,R.id.full_name, "[a-zA-Z\\s]+",R.string.full_name_Err);
+        awesomeValidation.addValidation(Registration_Activity.this,R.id.email,android.util.Patterns.EMAIL_ADDRESS,R.string.email_Err);
+        // awesomeValidation.addValidation(Registration_Activity.this,R.id.phno, RegexTemplate.TELEPHONE,R.string.phoneerr);
+        awesomeValidation.addValidation(Registration_Activity.this,R.id.password,regexPassword,R.string.password_Err);
+        awesomeValidation.addValidation(Registration_Activity.this,R.id.cpassword,R.id.password,R.string.cpassword_Err);
 
     }
     // writing data to database
@@ -111,20 +125,30 @@ public class Registration_Activity extends AppCompatActivity {
         databaseReference.child(user.getUid()).setValue(userInformation);
         Toast.makeText(this,"Information Saved ...",Toast.LENGTH_SHORT).show();
     }
-
+/*
     private Boolean validate(){
-        Boolean result = false;
+        Boolean valid = true;
 
-        password = edit_pass.getText().toString();
-        email = edit_email.getText().toString();
+        password = edit_pass.getText().toString().trim();
+        email = edit_email.getText().toString().trim();
+        name = edit_full_name.getText().toString().trim();
 
-
-        if(password.isEmpty() || email.isEmpty()){
-            Toast.makeText(this, "Please enter all the details", Toast.LENGTH_SHORT).show();
-        }else{
-            result = true;
+        if(name.isEmpty() || name.length() > 32){
+            edit_full_name.setError("Please Enter valid Name");
+            valid = false;
         }
 
-        return result;
+        if(email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            edit_email.setError("Please Enter valid Email Address");
+            valid = false;
+        }
+
+        if(password.isEmpty() || password.length() > 8){
+            edit_pass.setError("Please Enter valid Password");
+            valid = false;
+        }
+
+        return valid;
     }
+    */
 }

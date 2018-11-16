@@ -15,7 +15,7 @@
         android:layout_alignParentLeft="true"
         android:layout_marginStart="0dp"
         android:layout_marginLeft="0dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="-5dp"
         android:layout_weight="1"
         android:orientation="horizontal">
 
@@ -75,6 +75,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout2"
+        android:layout_marginTop="-9dp"
         android:orientation="vertical">
 
         <EditText
@@ -82,45 +83,54 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Email"
-            android:textSize="12dp"
-            android:inputType="textPersonName" />
+            android:hint="Email*"
+            android:inputType="textPersonName"
+            android:textSize="12dp" />
 
         <EditText
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:textSize="12dp"
-            android:hint="Password"
-            android:inputType="textPassword" />
+            android:hint="Password*"
+            android:inputType="textPassword"
+            android:textSize="12dp" />
+
+        <EditText
+            android:id="@+id/cpassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Confirm Password*"
+            android:inputType="textPassword"
+            android:textSize="12dp" />
 
         <EditText
             android:id="@+id/full_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Full Name"
-            android:textSize="12dp"
-            android:inputType="textPersonName" />
+            android:hint="Full Name*"
+            android:inputType="textPersonName"
+            android:textSize="12dp" />
 
         <EditText
             android:id="@+id/address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:textSize="12dp"
             android:hint="Address"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textSize="12dp" />
 
         <EditText
             android:id="@+id/city"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:textSize="12dp"
             android:hint="City"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textSize="12dp" />
 
         <EditText
             android:id="@+id/state"
@@ -128,26 +138,26 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="State"
-            android:textSize="12dp"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textSize="12dp" />
 
         <EditText
             android:id="@+id/zip_code"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:textSize="12dp"
             android:hint="Zip Code"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textSize="12dp" />
 
         <EditText
             android:id="@+id/country"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:textSize="12dp"
             android:hint="Country"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textSize="12dp" />
 
 
     </LinearLayout>
