@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     private EditText Username, Password;
     private TextView Info;
     private int counter = 5;
-    private TextView forgotPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

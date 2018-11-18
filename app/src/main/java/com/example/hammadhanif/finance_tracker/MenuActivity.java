@@ -17,7 +17,6 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MenuActivity extends AppCompatActivity {
 
-    String user_receive;
     private FirebaseAuth mAuth;
     private DatabaseReference databaseReference;
     private Button logout;
@@ -65,11 +64,6 @@ public class MenuActivity extends AppCompatActivity {
                 Logout();
             }
         });
-
-        //user_receive = getIntent().getExtras().getString("USERNAME");
-
-        //welcome.setText("WELCOME: " + user_receive);
-
 
 
         bt_Budget.setOnClickListener(new View.OnClickListener() {

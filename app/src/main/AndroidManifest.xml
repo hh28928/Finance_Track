@@ -19,8 +19,10 @@
         <activity android:name=".Registration_Activity" />
         <activity android:name=".MenuActivity" />
         <activity android:name=".CreateActivity" />
-        <activity android:name=".SalaryActivity">
-        </activity>
+        <activity android:name=".SalaryActivity" />
+        <activity android:name=".WeeklySalaryActivity" />
+        <activity android:name=".MonthlySalaryActivity" />
+        <activity android:name=".YearlySalaryActivity"></activity>
     </application>
 
 </manifest>
