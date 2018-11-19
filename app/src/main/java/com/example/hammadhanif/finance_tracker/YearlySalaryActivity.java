@@ -35,8 +35,9 @@ public class YearlySalaryActivity extends AppCompatActivity {
             Float rate_convert = Float.parseFloat(rate_w);
             Float tax_convert = Float.parseFloat(tax_w);
             Float tax = tax_convert / 100;
-            tax = tax * rate_convert;
-            Float total = rate_convert - tax;
+            Float rate = rate_convert * 12;
+            tax = tax * rate;
+            Float total = rate - tax;
             String controlDeci = String.format("%.2f", total);
 
             display.setText("Your Calculated Yearly Salary is: " + controlDeci);

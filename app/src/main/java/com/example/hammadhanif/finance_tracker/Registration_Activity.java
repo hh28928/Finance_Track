@@ -59,10 +59,7 @@ public class Registration_Activity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
 
                             if(task.isSuccessful()){
-                                saveUserinformation(); // Saves the data
-                                Toast.makeText(Registration_Activity.this, "Successfully Registered, Upload complete!", Toast.LENGTH_SHORT).show();
-                                finish();
-                                startActivity(new Intent(Registration_Activity.this, MainActivity.class));
+                                sendEmailVerification();
                             }else{
                                 Toast.makeText(Registration_Activity.this, "Registration Failed", Toast.LENGTH_SHORT).show();
                             }
@@ -125,7 +122,28 @@ public class Registration_Activity extends AppCompatActivity {
         databaseReference.child(user.getUid()).setValue(userInformation);
         Toast.makeText(this,"Information Saved ...",Toast.LENGTH_SHORT).show();
     }
-/*
+
+    private void sendEmailVerification(){
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+        if(firebaseUser!=null){
+            firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful()){
+                        saveUserinformation();
+                        Toast.makeText(Registration_Activity.this, "Successfully Registered, Verification mail sent!", Toast.LENGTH_LONG).show();
+                        mAuth.signOut();
+                        finish();
+                        startActivity(new Intent(Registration_Activity.this, MainActivity.class));
+                    }else{
+                        Toast.makeText(Registration_Activity.this, "Verification mail has'nt been sent!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+    }
+
+/*      // Generic Validation
     private Boolean validate(){
         Boolean valid = true;
 
