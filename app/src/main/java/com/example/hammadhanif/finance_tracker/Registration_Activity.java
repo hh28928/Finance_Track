@@ -119,7 +119,7 @@ public class Registration_Activity extends AppCompatActivity {
 
         UserInformation userInformation = new UserInformation(name,add,city,state,zip,country);
         FirebaseUser user = mAuth.getCurrentUser();
-        databaseReference.child(user.getUid()).child("Sign in Info").setValue(userInformation);
+        databaseReference.child(user.getUid()).setValue(userInformation);
         Toast.makeText(this,"Information Saved ...",Toast.LENGTH_SHORT).show();
     }
 
