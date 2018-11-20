@@ -9,10 +9,25 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+
 public class WeeklySalaryActivity extends AppCompatActivity {
 
     EditText hours_et, rate_et, tax_et;
     TextView display;
+    private FirebaseAuth mAuth;
+    private DatabaseReference databaseReference; // store data to firebase
+    public String weekly;
+
+    public WeeklySalaryActivity(){
+
+    }
+
+    public WeeklySalaryActivity(String weekly){
+        this.weekly = weekly;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +39,8 @@ public class WeeklySalaryActivity extends AppCompatActivity {
         tax_et = findViewById(R.id.percent);
 
         display = findViewById(R.id.display_tv);
+
+
     }
 
     public void onCalculate(View view) {
@@ -32,7 +49,6 @@ public class WeeklySalaryActivity extends AppCompatActivity {
         String tax_w = tax_et.getText().toString();
         if (hours_w.equals("") || rate_w.equals("") || tax_w.equals("")) {
             Toast.makeText(this, "At least one field is empty", Toast.LENGTH_LONG).show();
-            return;
         } else {
             Float hours_convert = Float.parseFloat(hours_w);
             Float rate_convert = Float.parseFloat(rate_w);
@@ -40,15 +56,25 @@ public class WeeklySalaryActivity extends AppCompatActivity {
             Float tax = tax_convert / 100;
             tax = tax * hours_convert * rate_convert;
             Float total = (hours_convert * rate_convert) - tax;
-            String controlDeci = String.format("%.2f", total);
+            String weekly = String.format("%.2f", total);
 
-            display.setText("Your Calculated Weekly Salary is: " + controlDeci);
+            display.setText("Your Calculated Weekly Salary is: " + weekly);
+            //saveDataInformation();
+            //Toast.makeText(this,"Information Saved ...",Toast.LENGTH_SHORT).show();
         }
-    }
 
-    public void onClickBack(View view) {
-        Intent backIntent = new Intent(this, SalaryActivity.class);
-        startActivity(backIntent);
     }
+/*
+    // writing data to database
+    private void saveDataInformation(){
+
+        String week = display.getText().toString().trim();
+
+        WeeklySalaryActivity weeklySalaryActivity = new WeeklySalaryActivity(week);
+        FirebaseUser user = mAuth.getCurrentUser();
+        databaseReference.child(user.getUid()).child("Salary Info").setValue(weeklySalaryActivity);
+        Toast.makeText(this,"Information Saved ...",Toast.LENGTH_SHORT).show();
+    }
+    */
 }
 

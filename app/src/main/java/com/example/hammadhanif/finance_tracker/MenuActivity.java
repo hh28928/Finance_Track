@@ -34,7 +34,7 @@ public class MenuActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         userID = user.getUid();
-        databaseReference = FirebaseDatabase.getInstance().getReference().child(userID);
+        databaseReference = FirebaseDatabase.getInstance().getReference().child(userID).child("Sign in Info");
 
         // retriving from database
         databaseReference.addValueEventListener(new ValueEventListener() {
