@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
 
 public class Registration_Activity extends AppCompatActivity {
 
-    EditText edit_full_name, edit_email, edit_pass, edit_cpass, edit_address, edit_city, edit_state;
+    EditText edit_full_name, edit_email, edit_pass, edit_cpass, edit_street, edit_city, edit_state;
     EditText edit_zipcode, edit_country, edit_phone_number;
     Button btnregister, btnback;
     String email, name, password;
@@ -91,7 +91,7 @@ public class Registration_Activity extends AppCompatActivity {
 
         // info storing in firebase
         edit_full_name = (EditText)findViewById(R.id.full_name);
-        edit_address = (EditText)findViewById(R.id.address);
+        edit_street = (EditText)findViewById(R.id.street);
         edit_city = (EditText)findViewById(R.id.city);
         edit_state = (EditText)findViewById(R.id.state);
         edit_zipcode = (EditText)findViewById(R.id.zip_code);
@@ -107,13 +107,20 @@ public class Registration_Activity extends AppCompatActivity {
         // awesomeValidation.addValidation(Registration_Activity.this,R.id.phno, RegexTemplate.TELEPHONE,R.string.phoneerr);
         awesomeValidation.addValidation(Registration_Activity.this,R.id.password,regexPassword,R.string.password_Err);
         awesomeValidation.addValidation(Registration_Activity.this,R.id.cpassword,R.id.password,R.string.cpassword_Err);
+        //Address
+        awesomeValidation.addValidation(Registration_Activity.this,R.id.street, "[0-9a-zA-Z\\s]+",R.string.address_Err);
+        awesomeValidation.addValidation(Registration_Activity.this,R.id.city, "[a-zA-Z\\s]+",R.string.address_Err);
+        awesomeValidation.addValidation(Registration_Activity.this,R.id.state, "[a-zA-Z\\s]+",R.string.address_Err);
+        awesomeValidation.addValidation(Registration_Activity.this,R.id.zip_code, "[0-9\\s]+",R.string.address_Err);
+        awesomeValidation.addValidation(Registration_Activity.this,R.id.country, "[a-zA-Z\\s]+",R.string.address_Err);
 
     }
     // writing data to database
     private void saveUserinformation(){
 
+        String email = edit_email.getText().toString().trim();
         String name = edit_full_name.getText().toString().trim();
-        String add = edit_address.getText().toString().trim();
+        String street = edit_street.getText().toString().trim();
         String city = edit_city.getText().toString().trim();
         String state = edit_state.getText().toString().trim();
         String zip = edit_zipcode.getText().toString().trim();
@@ -127,7 +134,7 @@ public class Registration_Activity extends AppCompatActivity {
         DatabaseReference usersRef = databaseReference.child(user.getUid());
 
         Map<String, UserInformation> users = new HashMap<>();
-        users.put("Users info", new UserInformation(name,add,city,state,zip,country));
+        users.put("Users info", new UserInformation(email,name,street,city,state,zip,country));
 
         usersRef.setValue(users);
 

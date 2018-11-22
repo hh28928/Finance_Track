@@ -2,8 +2,9 @@ package com.example.hammadhanif.finance_tracker;
 
 public class UserInformation {
 
+    public String email;
     public String name;
-    public String address;
+    public String street;
     public String city;
     public String state;
     public String zip;
@@ -13,21 +14,26 @@ public class UserInformation {
 
     }
 
-    public UserInformation(String name, String address, String city, String state, String zip, String country) {
+    public UserInformation(String email, String name, String street, String city, String state, String zip, String country) {
+        this.email = email;
         this.name = name;
-        this.address = address;
+        this.street = street;
         this.city = city;
         this.state = state;
         this.zip = zip;
         this.country = country;
     }
 
+    public String getEmail(){
+        return email;
+    }
+
     public String getName() {
         return name;
     }
 
-    public String getAddress() {
-        return address;
+    public String getStreet() {
+        return street;
     }
 
     public String getCity() {

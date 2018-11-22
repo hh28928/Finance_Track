@@ -4,4 +4,5 @@
     <string name="email_Err">Enter Email Address!</string>
     <string name="password_Err">Enter Password! It must contain a lowercase, an uppercase, a number, and special</string>
     <string name="cpassword_Err">Enter Confirm Password!</string>
+    <string name="address_Err">Enter Field!</string>
 </resources>
