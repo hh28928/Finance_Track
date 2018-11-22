@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -18,37 +19,32 @@ import com.google.firebase.database.ValueEventListener;
 public class MenuActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private DatabaseReference databaseReference;
     private Button logout;
     TextView welcome;
     Button bt_Budget;
     Button salary;
-    String userID;
+    private FirebaseDatabase firebaseDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
 
-
+        // retrieves data
         mAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = mAuth.getCurrentUser();
-        userID = user.getUid();
-        databaseReference = FirebaseDatabase.getInstance().getReference().child(userID);
-
-        // retriving from database
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference(mAuth.getUid()).child("Users info");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String fullN = dataSnapshot.child("name").getValue().toString();
 
-                welcome.setText("Welcome " + fullN +",");
-
+                UserInformation userProfile = dataSnapshot.getValue(UserInformation.class);
+                welcome.setText("Welcome " + userProfile.getName() + ",");
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                Toast.makeText(MenuActivity.this, databaseError.getCode(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -84,8 +80,8 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     private void Logout(){
-        mAuth.signOut();
-        finish();
+        //mAuth.signOut();
+        //finish();
         startActivity(new Intent(MenuActivity.this, MainActivity.class));
     }
 
