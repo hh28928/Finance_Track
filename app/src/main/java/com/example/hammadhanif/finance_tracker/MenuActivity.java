@@ -1,6 +1,7 @@
 package com.example.hammadhanif.finance_tracker;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -26,12 +27,35 @@ public class MenuActivity extends AppCompatActivity {
     Button bt_Budget;
     Button salary;
     private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
+    private String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
 
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        userID = user.getUid();
+        databaseReference = FirebaseDatabase.getInstance().getReference().child(userID);
+
+        // retriving from database
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                
+                String fullN = dataSnapshot.child("name").getValue().toString();
+                welcome.setText("Welcome " + fullN + ",");
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+        });
+        /*
         // retrieves data
         mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -49,6 +73,7 @@ public class MenuActivity extends AppCompatActivity {
                 Toast.makeText(MenuActivity.this, databaseError.getCode(), Toast.LENGTH_SHORT).show();
             }
         });
+*/
 
         bt_Budget = findViewById(R.id.cBudget);
         salary = findViewById(R.id.salary);
