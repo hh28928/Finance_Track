@@ -44,7 +44,7 @@ public class MenuActivity extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                
+
                 String fullN = dataSnapshot.child("name").getValue().toString();
                 welcome.setText("Welcome " + fullN + ",");
 
