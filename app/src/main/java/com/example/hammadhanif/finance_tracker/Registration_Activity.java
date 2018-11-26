@@ -125,20 +125,10 @@ public class Registration_Activity extends AppCompatActivity {
         String state = edit_state.getText().toString().trim();
         String zip = edit_zipcode.getText().toString().trim();
         String country = edit_country.getText().toString().trim();
-/*
-        UserInformation userInformation = new UserInformation(name,add,city,state,zip,country);
+
+        UserInformation userInformation = new UserInformation(email,name,street,city,state,zip,country);
         FirebaseUser user = mAuth.getCurrentUser();
         databaseReference.child(user.getUid()).setValue(userInformation);
-*/
-        FirebaseUser user = mAuth.getCurrentUser();
-        DatabaseReference usersRef = databaseReference.child(user.getUid());
-
-        Map<String, UserInformation> users = new HashMap<>();
-        users.put("Users info", new UserInformation(email,name,street,city,state,zip,country));
-
-        usersRef.setValue(users);
-
-
         Toast.makeText(this,"Information Saved ...",Toast.LENGTH_SHORT).show();
     }
 

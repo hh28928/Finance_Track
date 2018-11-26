@@ -52,4 +52,9 @@ public class UserInformation {
         return country;
     }
 
+    public String getAddress(){
+        return getStreet() + " \n\t\t\t\t\t\t\t\t\t\t" + getCity() + ", " +
+                getState() + " " + getZip() + " " + getCountry();
+    }
+
 }

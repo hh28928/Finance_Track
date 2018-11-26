@@ -23,19 +23,8 @@ public class WeeklySalaryActivity extends AppCompatActivity {
     TextView display;
     private FirebaseAuth mAuth;
     private DatabaseReference databaseReference; // store data to firebase
-    public String weekly;
+    public String yearly;
 
-    public WeeklySalaryActivity(){
-
-    }
-
-    public WeeklySalaryActivity(String weekly){
-        this.weekly = weekly;
-    }
-
-    public String getWeekly() {
-        return weekly;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,8 +55,10 @@ public class WeeklySalaryActivity extends AppCompatActivity {
                     tax = tax * hours_convert * rate_convert;
                     Float total = (hours_convert * rate_convert) - tax;
                     String weekly = String.format("%.2f", total);
-                    //saveDataInoformation;
+                    String yearly = String.format("%,.2f", total*52);
+
                     display.setText("Your Calculated Weekly Salary is: " + weekly);
+
                 }
 
             }
@@ -82,17 +73,5 @@ public class WeeklySalaryActivity extends AppCompatActivity {
         startActivity(backIntent);
     }
 
-/*
-    // writing data to database
-    private void saveDataInformation(){
-
-        String week = display.getText().toString();
-
-        WeeklySalaryActivity weeklySalaryActivity = new WeeklySalaryActivity(week);
-        FirebaseUser user = mAuth.getCurrentUser();
-        databaseReference.child(user.getUid()).child("Salary Info").setValue(weeklySalaryActivity);
-        Toast.makeText(WeeklySalaryActivity.this,"Information Saved ...",Toast.LENGTH_SHORT).show();
-    }
-*/
 }
 

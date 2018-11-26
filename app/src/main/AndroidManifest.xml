@@ -27,7 +27,6 @@
         <activity android:name=".YearlySalaryActivity" />
         <activity android:name=".PasswordActivity" />
         <activity android:name=".ProfileActivity" />
-
     </application>
 
 </manifest>
