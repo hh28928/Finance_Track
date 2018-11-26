@@ -22,7 +22,8 @@
         <activity android:name=".SalaryActivity" />
         <activity android:name=".WeeklySalaryActivity" />
         <activity android:name=".MonthlySalaryActivity" />
-        <activity android:name=".YearlySalaryActivity"></activity>
+        <activity android:name=".YearlySalaryActivity" />
+        <activity android:name=".BillReminderActivity"></activity>
     </application>
 
 </manifest>
