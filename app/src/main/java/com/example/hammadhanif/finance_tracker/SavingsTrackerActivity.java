@@ -3,7 +3,7 @@ package com.example.hammadhanif.finance_tracker;
 //import android.app.ListActivity;
 //import android.content.DialogInterface;
 import android.app.AlertDialog;
-import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
@@ -12,14 +12,16 @@ import java.util.Iterator;
 import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import static android.widget.Toast.LENGTH_LONG;
 
 public class SavingsTrackerActivity extends AppCompatActivity {
     ArrayList<goal> theGoals = new ArrayList<goal>();//This will hold the goals created by the user
@@ -39,7 +41,6 @@ public class SavingsTrackerActivity extends AppCompatActivity {
 
         //Buttons for use in the project
         Button addGoal =  findViewById(R.id.addGoal);
-        Button deletBtn = findViewById(R.id.deleteGoal);
 
         //These are for the display and putting items in the ListView
         theDisplay = findViewById(R.id.goalList);
@@ -47,17 +48,53 @@ public class SavingsTrackerActivity extends AppCompatActivity {
         theDisplay.setAdapter(goalAdapter);
 
         //These are for creating a dialog for deleting/editing goals
-
-        //YOU STILL NEED TO FINISH THE XML FILE SHOWN IN THE INSTRUCTIONS:
-        //http://www.worldbestlearningcenter.com/tips/Android-dialog-ListView.htm
         theDisplay.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View theView, int position, long id){
                 //After an item is clicked on, a dialog window will appear
-               /* ViewGroup thatViewGroup = (ViewGroup) theView;
-                TextView theTxt = (TextView) thatViewGroup.findViewById(R.id.theTxtItem);
-                Toast.makeText(SavingsTrackerActivity.this,theTxt.getText().toString(),Toast.LENGTH_LONG).show();
-           */ }
+                AlertDialog.Builder goalOptions = new AlertDialog.Builder(SavingsTrackerActivity.this);
+                final EditText changeAmount = new EditText(SavingsTrackerActivity.this);
+                final goal holdGoal = (goal) parent.getItemAtPosition(position);
+
+                LinearLayout.LayoutParams editLayout = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT);
+                changeAmount.setLayoutParams(editLayout);
+                goalOptions.setView(changeAmount);
+                goalOptions.setMessage(parent.getItemAtPosition(position).toString());
+                //This is intended for changing the goal amount
+                goalOptions.setNeutralButton("Add to Current", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialogInterface,int i){
+                        if(changeAmount.getText().equals("")){//Checking if the editText is Empty
+                            Toast.makeText(SavingsTrackerActivity.this,"Please enter a numerical value",Toast.LENGTH_LONG).show();
+                        }
+                        else{
+                            holdGoal.setCurrentAmount(holdGoal.getCurrentAmount() + Float.parseFloat(changeAmount.getText().toString()));
+                        }
+                        goalAdapter.notifyDataSetChanged();
+                    };
+                });
+
+                goalOptions.setPositiveButton("Subtract from Current", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialogInterface,int i){
+                        if(changeAmount.getText().equals("")){//Checking if the editText is Empty
+                            Toast.makeText(SavingsTrackerActivity.this,"Please enter a numerical value",Toast.LENGTH_LONG).show();
+                        }
+                        else{
+                            if(Float.parseFloat(changeAmount.getText().toString()) > holdGoal.getCurrentAmount()){
+                                Toast.makeText(SavingsTrackerActivity.this,"The amount entered is larger than what has been saved towards the goal",Toast.LENGTH_LONG).show();
+                            }
+                            else{
+                                holdGoal.setCurrentAmount(holdGoal.getCurrentAmount() - Float.parseFloat(changeAmount.getText().toString()));
+                            }
+                        }
+                        goalAdapter.notifyDataSetChanged();
+                    };
+                });
+
+                goalOptions.setNegativeButton("Cancel",null);
+                goalOptions.show();
+            }
         });
         //This method is for adding goalss
         OnClickListener goalAdder = new OnClickListener(){
@@ -77,17 +114,7 @@ public class SavingsTrackerActivity extends AppCompatActivity {
                 goalAdapter.notifyDataSetChanged();
             }
         };
-
-        deletBtn.setOnClickListener(goalDeleter);
     }
-    public void displayListDialog(View theView){
-        AlertDialog.Builder theBuilder = new AlertDialog.Builder(SavingsTrackerActivity.this);
-        theBuilder.setCancelable(true);
-        theBuilder.setView(theDisplay);
-        AlertDialog listDialog = theBuilder.create();
-        listDialog.show();
-    }
-
     public void deleteGoal(View theView){
         SparseBooleanArray selectedGoals = theDisplay.getCheckedItemPositions();
         int goalCount = theDisplay.getCount();
@@ -99,35 +126,35 @@ public class SavingsTrackerActivity extends AppCompatActivity {
             }
         }
         else {
-            Toast.makeText(this,"You need to select a goal for deletion", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"You need to select a goal for deletion", LENGTH_LONG).show();
         }
     }
     public void addGoal(View theView)   {
-        Iterator<goal> goalIterator = theGoals.iterator();
+        if(theGoals.isEmpty() == false) {
+            Iterator<goal> goalIterator = theGoals.iterator();
 
-        while(goalIterator.hasNext()) {
-            //This loop is to make sure the goal name has not been used more than once
-            goal currentGoal = goalIterator.next();
-            if(currentGoal.goalName.equals(name_et.getText().toString())) {
-                Toast.makeText(this, "This goal name has already been used, please choose another", Toast.LENGTH_LONG).show();
-                return; //returns if the name has been used already
+            while (goalIterator.hasNext()) {
+                //This loop is to make sure the goal name has not been used more than once
+                goal currentGoal = goalIterator.next();
+                if (currentGoal.goalName.equals(name_et.getText().toString())) {
+                    Toast.makeText(this, "This goal name has already been used, please choose another", LENGTH_LONG).show();
+                    return; //returns if the name has been used already
+                }
             }
         }
-        if(name_et.getText().toString().length() > 30) {//Checking the length of the goal name
-            Toast.makeText(this, "The name of this goal is too long, it can only be thirty characters", Toast.LENGTH_LONG).show();
-            return;
+        if (name_et.getText().toString().equals("") || goal_et.getText().toString().equals("")||current_et.getText().toString().equals("")) {
+            Toast.makeText(this, "At least one field is empty", LENGTH_LONG).show();
+            return;//Checks if either the goal amount or name field is empty
         }
         else {
-            if (name_et.equals("") || goal_et.equals("")) {
-                Toast.makeText(this, "At least one field is empty", Toast.LENGTH_LONG).show();
-                return;//Checks if either the goal amount or name field is empty
-            } else {
-                Float currentVal = 0.0f;//If the current amount is empty, then zero is put in as the default value
-                if (!current_et.equals(""))
-                    currentVal = Float.parseFloat(current_et.getText().toString());
-                goal holdGoal = new goal(Float.parseFloat(goal_et.getText().toString()), currentVal, name_et.getText().toString());
+            if(name_et.getText().toString().length() > 30) {//Checking the length of the goal name
+                Toast.makeText(this, "The name of this goal is too long, it can only be thirty characters", LENGTH_LONG).show();
+                return;
+            }
+            else {
+                goal holdGoal = new goal(Float.parseFloat(goal_et.getText().toString()), Float.parseFloat(current_et.getText().toString()), name_et.getText().toString());
                 if(holdGoal.getCurrentAmount() >= holdGoal.getGoalAmount()) {
-                    Toast.makeText(this, "The current amount you entered is equal to the goal amount, you don't need to make a goal", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "The current amount you entered is equal to the goal amount, you don't need to make a goal", LENGTH_LONG).show();
                 }
                 else {
                     theGoals.add(holdGoal);//Adds a new goal into the ArrayList, it should show up on the list UI

@@ -47,21 +47,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/deleteGoal"
-        android:layout_width="152dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="116dp"
-        android:background="@drawable/rounded_button"
-        android:text="DELETE GOAL(S)"
-        app:showAsAction="collapseActionView|always"
-        app:layout_constraintBottom_toTopOf="@+id/back"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/goalList"
-        app:layout_constraintVertical_bias="0.785" />
 
     <Button
         android:id="@+id/back"
