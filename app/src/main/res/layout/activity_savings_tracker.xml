@@ -20,11 +20,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <item android:id="@+id/action_delete"
-        android:title=""
-        android:icon="@android:drawable/ic_menu_delete"
-        app:showAsAction="collapseActionView|always"/>
-
     <TextView
         android:id="@+id/createNewGoal"
         android:layout_width="172dp"
@@ -46,12 +41,27 @@
         android:layout_height="40dp"
         android:layout_marginTop="464dp"
         android:background="@drawable/rounded_button"
-        android:onClick="addGoal"
         android:text="ADD GOAL"
         app:layout_constraintHorizontal_bias="0.068"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/deleteGoal"
+        android:layout_width="152dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="116dp"
+        android:background="@drawable/rounded_button"
+        android:text="DELETE GOAL(S)"
+        app:showAsAction="collapseActionView|always"
+        app:layout_constraintBottom_toTopOf="@+id/back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goalList"
+        app:layout_constraintVertical_bias="0.785" />
 
     <Button
         android:id="@+id/back"

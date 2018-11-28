@@ -23,6 +23,7 @@ public class MenuActivity extends AppCompatActivity {
     TextView welcome;
     Button bt_Budget;
     Button salary;
+    Button savings;
     String userID;
 
     @Override
@@ -55,6 +56,7 @@ public class MenuActivity extends AppCompatActivity {
         bt_Budget = findViewById(R.id.cBudget);
         salary = findViewById(R.id.salary);
         welcome = findViewById(R.id.welcome_text);
+        savings = findViewById(R.id.savings);
 
         logout = (Button)findViewById(R.id.siOut);
 
@@ -80,6 +82,14 @@ public class MenuActivity extends AppCompatActivity {
                 Intent sIntent = new Intent(MenuActivity.this, SalaryActivity.class);
                 startActivity(sIntent);
             }
+        });
+
+        savings.setOnClickListener(new View.OnClickListener(){
+           @Override
+           public void onClick(View v){
+               Intent salIntent = new Intent(MenuActivity.this, SavingsTrackerActivity.class);
+               startActivity(salIntent);
+           }
         });
     }
 
