@@ -23,7 +23,6 @@ public class MenuActivity extends AppCompatActivity {
     TextView welcome;
     Button bt_Budget;
     Button salary;
-    Button reminder;
     String userID;
 
     @Override
@@ -37,7 +36,7 @@ public class MenuActivity extends AppCompatActivity {
         userID = user.getUid();
         databaseReference = FirebaseDatabase.getInstance().getReference().child(userID);
 
-        // retrieving from database
+        // retriving from database
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -55,7 +54,6 @@ public class MenuActivity extends AppCompatActivity {
 
         bt_Budget = findViewById(R.id.cBudget);
         salary = findViewById(R.id.salary);
-        //reminder = findViewById(R.id.); MAKE SURE TO ADD THIS
         welcome = findViewById(R.id.welcome_text);
 
         logout = (Button)findViewById(R.id.siOut);
@@ -91,4 +89,8 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(new Intent(MenuActivity.this, MainActivity.class));
     }
 
+    public void onClickBillReminder(View view) {
+        Intent billRemIntent = new Intent(this, BillReminderActivity.class);
+        startActivity(billRemIntent);
+    }
 }
