@@ -3,6 +3,7 @@ package com.example.hammadhanif.finance_tracker;
 //import android.app.ListActivity;
 //import android.content.DialogInterface;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.util.SparseBooleanArray;
 import java.util.ArrayList;
 import java.util.Iterator;
 import android.content.Intent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -53,6 +55,8 @@ public class SavingsTrackerActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View theView, int position, long id){
                 //After an item is clicked on, a dialog window will appear
                 AlertDialog.Builder goalOptions = new AlertDialog.Builder(SavingsTrackerActivity.this);
+                LayoutInflater theInflater = getLayoutInflater();
+
                 final EditText changeAmount = new EditText(SavingsTrackerActivity.this);
                 final goal holdGoal = (goal) parent.getItemAtPosition(position);
 
@@ -96,6 +100,9 @@ public class SavingsTrackerActivity extends AppCompatActivity {
                 goalOptions.show();
             }
         });
+
+        //Various assorted methods below
+
         //This method is for adding goalss
         OnClickListener goalAdder = new OnClickListener(){
             @Override
