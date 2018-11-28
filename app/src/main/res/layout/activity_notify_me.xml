@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:id="@+id/linear_name"
+        android:gravity="center"
         android:layout_below="@id/add_new">
 
         <TextView
@@ -52,6 +53,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:id="@+id/linear_date"
+        android:gravity="center"
         android:layout_below="@id/linear_name">
 
 
@@ -59,7 +61,7 @@
             android:id="@+id/Date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Weight: "
+            android:text="Date: "
             android:textSize="25dp"
             android:textColor="#000000"/>
 
@@ -81,10 +83,13 @@
         android:id="@+id/add_this"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/linear_name"
+        android:layout_below="@id/linear_date"
         android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:textSize="20dp"
         android:text="Add this exercise"
+        android:background="@drawable/rounded_button"
         android:textStyle="bold"
         android:onClick="onClickAdd"/>
 
