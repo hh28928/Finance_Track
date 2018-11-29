@@ -35,20 +35,11 @@ public class SalaryActivity extends AppCompatActivity {
             }
         });
 
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent backIntent = new Intent(SalaryActivity.this, MenuActivity.class);
-                startActivity(backIntent);
-            }
-        });
-
         uidR = getIntent().getExtras().getString("UID");
     }
 
     private void setupUIViews(){
         next_bt = (Button)findViewById(R.id.next);
-        back = (Button)findViewById(R.id.backbtn);
         radioGroup = (RadioGroup)findViewById(R.id.RG);
     }
 

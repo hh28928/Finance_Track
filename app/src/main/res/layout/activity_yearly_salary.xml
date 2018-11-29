@@ -32,15 +32,6 @@
             android:onClick="onCalculate"
             android:text="Calculate" />
 
-        <Button
-            android:id="@+id/back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1"
-            android:background="@drawable/rounded_button"
-            android:text="Back"
-            android:onClick="onClickBack"/>
     </LinearLayout>
 
     <TextView

@@ -25,6 +25,7 @@ public class MenuActivity extends AppCompatActivity {
     Button salary;
     Button savings;
     String userID;
+    FirebaseUser user;
 
     public String getUserID() {
         return userID;
@@ -37,7 +38,7 @@ public class MenuActivity extends AppCompatActivity {
 
 
         mAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = mAuth.getCurrentUser();
+        user = mAuth.getCurrentUser();
         userID = user.getUid();
         databaseReference = FirebaseDatabase.getInstance().getReference().child(userID);
 

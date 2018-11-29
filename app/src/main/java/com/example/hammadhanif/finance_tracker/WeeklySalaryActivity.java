@@ -67,10 +67,6 @@ public class WeeklySalaryActivity extends AppCompatActivity {
 
     }
 
-    public void onClickBack(View view) {
-        Intent backIntent = new Intent(this, SalaryActivity.class);
-        startActivity(backIntent);
-    }
 
 }
 

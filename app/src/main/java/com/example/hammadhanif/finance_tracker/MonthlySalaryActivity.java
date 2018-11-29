@@ -53,10 +53,4 @@ public class MonthlySalaryActivity extends AppCompatActivity {
             Toast.makeText(this, "Budget has been updated...", Toast.LENGTH_SHORT).show();
         }
     }
-    public void onClickBack(View view) {
-        rate_et.setText("0");
-        tax_et.setText("0");
-        Intent backIntent = new Intent(this, SalaryActivity.class);
-        startActivity(backIntent);
-    }
 }

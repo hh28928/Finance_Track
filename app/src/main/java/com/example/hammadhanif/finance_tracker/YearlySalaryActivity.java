@@ -54,11 +54,5 @@ public class YearlySalaryActivity extends AppCompatActivity {
         }
     }
 
-    public void onClickBack(View view) {
-        rate_et.setText("0");
-        tax_et.setText("0");
-        Intent backIntent = new Intent(this, SalaryActivity.class);
-        startActivity(backIntent);
-    }
 
 }
