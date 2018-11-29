@@ -5,15 +5,18 @@
     <item
         android:id="@+id/profileMenu"
         android:orderInCategory="200"
-        app:showAsAction="never"
+        android:icon="@drawable/profile_icon"
+        app:showAsAction="ifRoom"
         android:title="Profile">
     </item>
 
     <item
-        android:id="@+id/refreshMenu"
-        android:orderInCategory="300"
-        app:showAsAction="never"
-        android:title="Refresh">
+        android:id="@+id/exit"
+        android:orderInCategory="200"
+        android:icon="@drawable/exit"
+        app:showAsAction="ifRoom"
+        android:title="Logout">
     </item>
+
 
 </menu>

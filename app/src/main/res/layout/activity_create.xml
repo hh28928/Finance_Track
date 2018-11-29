@@ -35,7 +35,7 @@
         android:textColor="#ffffff"
         android:textSize="20dp"
         android:textStyle="bold"
-        android:layout_below="@id/addExpense"/>
+        android:layout_below="@+id/addExpense"/>
 
     <!--<ScrollView-->
         <!--android:id="@+id/scrollView2"-->
