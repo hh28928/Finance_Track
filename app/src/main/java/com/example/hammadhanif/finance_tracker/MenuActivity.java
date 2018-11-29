@@ -117,15 +117,15 @@ public class MenuActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-       switch (item.getItemId()){
+       switch (item.getItemId()) {
            case R.id.profileMenu:
                startActivity(new Intent(MenuActivity.this, ProfileActivity.class));
-               Toast.makeText(this,"Profile Settings selected", Toast.LENGTH_LONG).show();
-               return true;
+               // Toast.makeText(this,"Profile Settings selected", Toast.LENGTH_LONG).show();
+       }
+       switch (item.getItemId()){
            case R.id.exit:
                Logout();
-               Toast.makeText(this,"Logout selected", Toast.LENGTH_LONG).show();
-               return true;
+               //Toast.makeText(this,"Logout selected", Toast.LENGTH_LONG).show();
        }
         return super.onOptionsItemSelected(item);
     }

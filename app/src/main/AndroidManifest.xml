@@ -24,7 +24,10 @@
         <activity android:name=".YearlySalaryActivity" />
         <activity android:name=".BillReminderActivity" />
         <activity android:name=".NotifyMeActivity" />
-        <activity android:name=".AddExpenseActivity"></activity>
+        <activity android:name=".AddExpenseActivity" />
+        <activity android:name=".ProfileActivity">
+
+        </activity>
     </application>
 
 </manifest>
