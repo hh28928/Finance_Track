@@ -67,15 +67,6 @@ public class MenuActivity extends AppCompatActivity {
         welcome = findViewById(R.id.welcome_text);
         savings = findViewById(R.id.savings);
 
-        logout = (Button)findViewById(R.id.siOut);
-
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Logout();
-            }
-        });
-
 
         bt_Budget.setOnClickListener(new View.OnClickListener() {
             @Override
