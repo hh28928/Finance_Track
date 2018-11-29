@@ -9,10 +9,22 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class WeeklySalaryActivity extends AppCompatActivity {
 
     EditText hours_et, rate_et, tax_et;
     TextView display;
+    private DatabaseReference databaseReference; // store data to firebase
+    public String yearly;
+    String uidR;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,15 +36,18 @@ public class WeeklySalaryActivity extends AppCompatActivity {
         tax_et = findViewById(R.id.percent);
 
         display = findViewById(R.id.display_tv);
-    }
 
-    public void onCalculate(View view) {
+        uidR = getIntent().getExtras().getString("UID"); // Users Authentication
+
+        }
+
+    public void onCalculate(View view){
         String hours_w = hours_et.getText().toString();
         String rate_w = rate_et.getText().toString();
         String tax_w = tax_et.getText().toString();
+
         if (hours_w.equals("") || rate_w.equals("") || tax_w.equals("")) {
-            Toast.makeText(this, "At least one field is empty", Toast.LENGTH_LONG).show();
-            return;
+            Toast.makeText(WeeklySalaryActivity.this, "At least one field is empty", Toast.LENGTH_LONG).show();
         } else {
             Float hours_convert = Float.parseFloat(hours_w);
             Float rate_convert = Float.parseFloat(rate_w);
@@ -40,15 +55,23 @@ public class WeeklySalaryActivity extends AppCompatActivity {
             Float tax = tax_convert / 100;
             tax = tax * hours_convert * rate_convert;
             Float total = (hours_convert * rate_convert) - tax;
-            String controlDeci = String.format("%.2f", total);
+            String weekly = String.format("%.2f", total);
+            String yearly = String.format("%,.2f", total*52);
 
-            display.setText("Your Calculated Weekly Salary is: " + controlDeci);
+            display.setText("Your Calculated Weekly Salary is: " + weekly);
+
+            final FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference data = database.getReference().child(uidR).child("budget");
+            data.setValue(weekly);
+            Toast.makeText(this, "Budget has been updated...", Toast.LENGTH_SHORT).show();
         }
+
     }
 
     public void onClickBack(View view) {
         Intent backIntent = new Intent(this, SalaryActivity.class);
         startActivity(backIntent);
     }
+
 }
 
