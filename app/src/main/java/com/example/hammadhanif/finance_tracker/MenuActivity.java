@@ -3,9 +3,13 @@ package com.example.hammadhanif.finance_tracker;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -97,5 +101,32 @@ public class MenuActivity extends AppCompatActivity {
     public void onClickBillReminder(View view) {
         Intent billRemIntent = new Intent(this, BillReminderActivity.class);
         startActivity(billRemIntent);
+    }
+
+    public void onClickCreateBudget(View view) {
+        Intent createIntent = new Intent(this, CreateActivity.class);
+        startActivity(createIntent);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+       switch (item.getItemId()) {
+           case R.id.profileMenu:
+               startActivity(new Intent(MenuActivity.this, ProfileActivity.class));
+               // Toast.makeText(this,"Profile Settings selected", Toast.LENGTH_LONG).show();
+       }
+       switch (item.getItemId()){
+           case R.id.exit:
+               Logout();
+               //Toast.makeText(this,"Logout selected", Toast.LENGTH_LONG).show();
+       }
+        return super.onOptionsItemSelected(item);
     }
 }
