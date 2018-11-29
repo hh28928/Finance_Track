@@ -65,7 +65,6 @@ public class Registration_Activity extends AppCompatActivity {
                             }else{
                                 Toast.makeText(Registration_Activity.this, "Registration Failed", Toast.LENGTH_SHORT).show();
                             }
-
                         }
                     });
                 }
@@ -116,7 +115,7 @@ public class Registration_Activity extends AppCompatActivity {
 
     }
     // writing data to database
-    private void saveUserinformation(){
+    private void saveUserInformation(){
 
         String email = edit_email.getText().toString().trim();
         String name = edit_full_name.getText().toString().trim();
@@ -139,7 +138,7 @@ public class Registration_Activity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
-                        saveUserinformation();
+                        saveUserInformation();
                         Toast.makeText(Registration_Activity.this, "Successfully Registered, Verification mail sent!", Toast.LENGTH_LONG).show();
                         mAuth.signOut();
                         finish();

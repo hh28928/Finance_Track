@@ -9,10 +9,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class YearlySalaryActivity extends AppCompatActivity {
 
     EditText rate_et, tax_et;
     TextView display;
+    String uidR;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +27,8 @@ public class YearlySalaryActivity extends AppCompatActivity {
         tax_et = findViewById(R.id.percent);
 
         display = findViewById(R.id.display_tv);
+
+        uidR = getIntent().getExtras().getString("UID"); // Users Authentication
     }
 
     public void onCalculate(View view) {
@@ -38,9 +44,14 @@ public class YearlySalaryActivity extends AppCompatActivity {
             Float rate = rate_convert * 12;
             tax = tax * rate;
             Float total = rate - tax;
-            String controlDeci = String.format("%.2f", total);
+            String yearly = String.format("%.2f", total);
 
-            display.setText("Your Calculated Yearly Salary is: " + controlDeci);
+            display.setText("Your Calculated Yearly Salary is: " + yearly);
+
+            final FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference data = database.getReference().child(uidR).child("budget");
+            data.setValue(yearly);
+            Toast.makeText(this, "Budget has been updated...", Toast.LENGTH_SHORT).show();
         }
     }
 

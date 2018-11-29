@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SalaryActivity extends AppCompatActivity {
@@ -18,7 +20,7 @@ public class SalaryActivity extends AppCompatActivity {
     private RadioButton rb;
     private TextView rate;
     private RadioGroup radioGroup;
-
+    String uidR;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +43,7 @@ public class SalaryActivity extends AppCompatActivity {
             }
         });
 
-
+        uidR = getIntent().getExtras().getString("UID");
     }
 
     private void setupUIViews(){
@@ -55,12 +57,15 @@ public class SalaryActivity extends AppCompatActivity {
         rb = (RadioButton)findViewById(selected_id);
         if (rb.getText().toString().equals("Weekly Rate")) {
             Intent weeklyIntent = new Intent(this, WeeklySalaryActivity.class);
+            weeklyIntent.putExtra("UID", uidR); // Passes the Users Authentication to a class
             startActivity(weeklyIntent);
         } else if (rb.getText().toString().equals("Monthly Rate")) {
             Intent monthlyIntent = new Intent(this, MonthlySalaryActivity.class);
+            monthlyIntent.putExtra("UID", uidR); // Passes the Users Authentication to a class
             startActivity(monthlyIntent);
         } else if (rb.getText().toString().equals("Yearly Rate")) {
             Intent yearlyIntent = new Intent(this, YearlySalaryActivity.class);
+            yearlyIntent.putExtra("UID", uidR); // Passes the Users Authentication to a class
             startActivity(yearlyIntent);
         }
     }

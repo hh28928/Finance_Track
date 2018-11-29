@@ -25,6 +25,10 @@ public class MenuActivity extends AppCompatActivity {
     Button salary;
     String userID;
 
+    public String getUserID() {
+        return userID;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +82,7 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent sIntent = new Intent(MenuActivity.this, SalaryActivity.class);
+                sIntent.putExtra("UID", getUserID()); // Passes the Users Authentication to a class
                 startActivity(sIntent);
             }
         });
