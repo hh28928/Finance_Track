@@ -98,4 +98,9 @@ public class MenuActivity extends AppCompatActivity {
         Intent billRemIntent = new Intent(this, BillReminderActivity.class);
         startActivity(billRemIntent);
     }
+
+    public void onClickCreateBudget(View view) {
+        Intent createIntent = new Intent(this, CreateActivity.class);
+        startActivity(createIntent);
+    }
 }

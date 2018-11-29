@@ -150,31 +150,4 @@ public class Registration_Activity extends AppCompatActivity {
             });
         }
     }
-
-/*      // Generic Validation
-    private Boolean validate(){
-        Boolean valid = true;
-
-        password = edit_pass.getText().toString().trim();
-        email = edit_email.getText().toString().trim();
-        name = edit_full_name.getText().toString().trim();
-
-        if(name.isEmpty() || name.length() > 32){
-            edit_full_name.setError("Please Enter valid Name");
-            valid = false;
-        }
-
-        if(email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            edit_email.setError("Please Enter valid Email Address");
-            valid = false;
-        }
-
-        if(password.isEmpty() || password.length() > 8){
-            edit_pass.setError("Please Enter valid Password");
-            valid = false;
-        }
-
-        return valid;
-    }
-    */
 }

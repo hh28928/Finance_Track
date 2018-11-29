@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NotifyMeActivity">
+    tools:context=".AddExpenseActivity">
 
     <TextView
         android:id="@+id/add_new"
@@ -16,7 +16,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Add a new Bill"
+        android:text="Add a new Expense"
         android:textColor="#ffffff"
         android:gravity="center"
         android:background="@color/colorPrimary"
@@ -55,29 +55,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:id="@+id/linear_date"
+        android:id="@+id/linear_amount"
         android:gravity="center"
         android:layout_below="@id/linear_name">
 
 
         <TextView
-            android:id="@+id/Date"
+            android:id="@+id/spent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Date: "
+            android:text="Amount: "
             android:textSize="25dp"
             android:textColor="#000000"/>
 
         <EditText
-            android:id="@+id/edit_date"
+            android:id="@+id/edit_spent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="date"
-            android:focusable="false"
-            android:onClick="calendarPopup"
+            android:inputType="numberDecimal"
             android:textSize="15dp"
-            android:hint="Date"
+            android:hint="Amount Spend"
             android:layout_gravity="left"
             android:gravity="left"/>
     </LinearLayout>
@@ -86,17 +84,16 @@
         android:id="@+id/add_this"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/linear_date"
+        android:layout_below="@id/linear_amount"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:textSize="20dp"
-        android:text="Add This Bill"
-        android:textAllCaps="true"
+        android:text="Add this Expense"
         android:textColor="#ffffff"
-        android:gravity="center"
         android:background="@drawable/rounded_button"
         android:textStyle="bold"
         android:onClick="onClickAdd"/>
+
 
 </RelativeLayout>
