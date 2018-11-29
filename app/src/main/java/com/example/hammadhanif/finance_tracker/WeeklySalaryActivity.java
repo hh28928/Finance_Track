@@ -56,7 +56,6 @@ public class WeeklySalaryActivity extends AppCompatActivity {
             tax = tax * hours_convert * rate_convert;
             Float total = (hours_convert * rate_convert) - tax;
             String weekly = String.format("%.2f", total);
-            String yearly = String.format("%,.2f", total*52);
 
             display.setText("Your Calculated Weekly Salary is: " + weekly);
 

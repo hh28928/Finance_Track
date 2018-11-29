@@ -21,9 +21,12 @@ public class CreateActivity extends AppCompatActivity {
     String[] createBudgetColumns = {"Name", "Spent", "Remaining", "Salary"};
     String[][] createBudgetTables;
     TableView<String[]> tableView;
-    int salary = 4400;
-    int salaryCopy = salary;
+
+    float salary = 4400;
+    float salaryCopy = salary;
     int ctr = 0;
+    int i = 0;
+    ArrayList<Spaceprobe> spaceprobesList = new ArrayList<Spaceprobe>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,23 +48,25 @@ public class CreateActivity extends AppCompatActivity {
     private void populateData() {
 
         Spaceprobe spaceprobe = new Spaceprobe();
-        ArrayList<Spaceprobe> spaceprobesList = new ArrayList<Spaceprobe>();
 
         spaceprobe.setName(stName);
         spaceprobe.setAmountSpent("$" + stAmount);
         spaceprobe.setSalary("$" + "4400");
-        salaryCopy = salaryCopy - Integer.valueOf(stAmount);
-        spaceprobe.setAmountRemaining("$" + Integer.toString(salaryCopy));
+        if ((salaryCopy - Float.valueOf(stAmount)) < 0) {
+            Toast.makeText(this, "Not enough money in the bank!", Toast.LENGTH_LONG).show();
+            return;
+        }
+        salaryCopy = salaryCopy - Float.valueOf(stAmount);
+        spaceprobe.setAmountRemaining("$" + Float.toString(salaryCopy));
         spaceprobesList.add(spaceprobe);
-
         createBudgetTables = new String[spaceprobesList.size()][4];
         for (int i = 0; i < spaceprobesList.size(); i++) {
             Spaceprobe s = spaceprobesList.get(i);
 
-            createBudgetTables[i][0] = spaceprobe.getName();
-            createBudgetTables[i][1] = spaceprobe.getAmountSpent();
-            createBudgetTables[i][2] = spaceprobe.getAmountRemaining();
-            createBudgetTables[i][3] = spaceprobe.getSalary();
+            createBudgetTables[i][0] = s.getName();
+            createBudgetTables[i][1] = s.getAmountSpent();
+            createBudgetTables[i][2] = s.getAmountRemaining();
+            createBudgetTables[i][3] = s.getSalary();
         }
         ctr++;
         tableView.setDataAdapter(new SimpleTableDataAdapter(this, createBudgetTables));
@@ -78,6 +83,7 @@ public class CreateActivity extends AppCompatActivity {
         if (requestCode == 1 && resultCode == RESULT_OK) {
             stName = data.getStringExtra("NAME");
             stAmount = data.getStringExtra("AMOUNT");
+
             populateData();
 
         }

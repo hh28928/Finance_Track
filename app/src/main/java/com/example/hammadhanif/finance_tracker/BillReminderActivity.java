@@ -29,6 +29,15 @@ public class BillReminderActivity extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.myList);
 
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                String Item = ((TextView) view).getText().toString();
+                myAdapter.remove(Item);
+                return true;
+            }
+        });
+
     }
 
 

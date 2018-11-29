@@ -37,14 +37,6 @@
         android:textStyle="bold"
         android:layout_below="@id/addExpense"/>
 
-    <!--<ScrollView-->
-        <!--android:id="@+id/scrollView2"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:layout_marginLeft="8dp"-->
-        <!--android:layout_marginBottom="172dp"-->
-        <!--android:layout_below="@id/textView">-->
 
         <de.codecrafters.tableview.TableView xmlns:table="http://schemas.android.com/apk/res-auto"
             android:id="@+id/tableView"
@@ -52,8 +44,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_below="@id/textView"
-            table:tableView_columnCount="4" />
-        />
-    <!--</ScrollView>-->
+            table:tableView_columnCount="4"
+            />
 
 </RelativeLayout>

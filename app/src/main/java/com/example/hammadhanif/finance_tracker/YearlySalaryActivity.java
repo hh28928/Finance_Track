@@ -41,9 +41,8 @@ public class YearlySalaryActivity extends AppCompatActivity {
             Float rate_convert = Float.parseFloat(rate_w);
             Float tax_convert = Float.parseFloat(tax_w);
             Float tax = tax_convert / 100;
-            Float rate = rate_convert * 12;
-            tax = tax * rate;
-            Float total = rate - tax;
+            tax = tax * rate_convert;
+            Float total = rate_convert - tax;
             String yearly = String.format("%.2f", total);
 
             display.setText("Your Calculated Yearly Salary is: " + yearly);
@@ -56,6 +55,8 @@ public class YearlySalaryActivity extends AppCompatActivity {
     }
 
     public void onClickBack(View view) {
+        rate_et.setText("0");
+        tax_et.setText("0");
         Intent backIntent = new Intent(this, SalaryActivity.class);
         startActivity(backIntent);
     }
