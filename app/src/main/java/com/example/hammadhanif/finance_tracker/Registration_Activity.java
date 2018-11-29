@@ -92,7 +92,7 @@ public class Registration_Activity extends AppCompatActivity {
 
         // info storing in firebase
         edit_full_name = (EditText)findViewById(R.id.full_name);
-        edit_address = (EditText)findViewById(R.id.address);
+        edit_address = (EditText)findViewById(R.id.street);
         edit_city = (EditText)findViewById(R.id.city);
         edit_state = (EditText)findViewById(R.id.state);
         edit_zipcode = (EditText)findViewById(R.id.zip_code);
@@ -113,6 +113,7 @@ public class Registration_Activity extends AppCompatActivity {
     // writing data to database
     private void saveUserinformation(){
 
+        String email = edit_email.getText().toString().trim();
         String name = edit_full_name.getText().toString().trim();
         String add = edit_address.getText().toString().trim();
         String city = edit_city.getText().toString().trim();
@@ -120,7 +121,7 @@ public class Registration_Activity extends AppCompatActivity {
         String zip = edit_zipcode.getText().toString().trim();
         String country = edit_country.getText().toString().trim();
 
-        UserInformation userInformation = new UserInformation(name,add,city,state,zip,country);
+        UserInformation userInformation = new UserInformation(email,name,add,city,state,zip,country);
         FirebaseUser user = mAuth.getCurrentUser();
         databaseReference.child(user.getUid()).setValue(userInformation);
         Toast.makeText(this,"Information Saved ...",Toast.LENGTH_SHORT).show();
