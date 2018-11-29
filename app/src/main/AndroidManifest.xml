@@ -23,6 +23,7 @@
         <activity android:name=".MonthlySalaryActivity" />
         <activity android:name=".YearlySalaryActivity" />
         <activity android:name=".BillReminderActivity" />
+        <activity android:name=".Registration_Activity"/>
         <activity android:name=".NotifyMeActivity"></activity>
     </application>
 
