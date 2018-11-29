@@ -115,11 +115,11 @@
             android:textSize="12dp" />
 
         <EditText
-            android:id="@+id/address"
+            android:id="@+id/street"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Address"
+            android:hint="Street"
             android:inputType="textPersonName"
             android:textSize="12dp" />
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.hammadhanif.finance_tracker">
-
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,7 +16,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Registration_Activity" />
         <activity android:name=".MenuActivity" />
         <activity android:name=".CreateActivity" />
         <activity android:name=".SalaryActivity" />
@@ -24,7 +23,7 @@
         <activity android:name=".MonthlySalaryActivity" />
         <activity android:name=".YearlySalaryActivity" />
         <activity android:name=".BillReminderActivity" />
-        <activity android:name=".BillSetActivity"></activity>
+        <activity android:name=".NotifyMeActivity"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SavingsTrackerActivity">
+
+    <TextView
+        android:id="@+id/listTitle"
+        android:layout_width="126dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="16dp"
+        android:text="Financial Goals"
+        android:textColor="#000000"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <item android:id="@+id/action_delete"
+        android:title=""
+        android:icon="@android:drawable/ic_menu_delete"
+        app:showAsAction="collapseActionView|always"/>
+
+    <TextView
+        android:id="@+id/createNewGoal"
+        android:layout_width="172dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="Create Another Goal:"
+        android:textColor="#000000"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/theName"
+        app:layout_constraintHorizontal_bias="0.089"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goalList" />
+
+    <Button
+        android:id="@+id/addGoal"
+        android:layout_width="152dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="464dp"
+        android:background="@drawable/rounded_button"
+        android:onClick="addGoal"
+        android:text="ADD GOAL"
+        app:layout_constraintHorizontal_bias="0.068"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/back"
+        android:layout_width="152dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginLeft="44dp"
+        android:layout_marginTop="464dp"
+        android:layout_weight="1"
+        android:background="@drawable/rounded_button"
+        android:onClick="onClickBack"
+        android:text="Back"
+        app:layout_constraintStart_toEndOf="@+id/addGoal"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/goalList"
+        android:layout_width="387dp"
+        android:layout_height="232dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listTitle" />
+
+    <EditText
+        android:id="@+id/theName"
+        android:layout_width="175dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:ems="10"
+        android:hint="Goal Name"
+        android:inputType="text"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/goalAmount"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/goalAmount"
+        android:layout_width="175dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:ems="10"
+        android:hint="Goal Amount $0.00"
+        android:inputType="text"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/currentAmount"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/currentAmount"
+        android:layout_width="175dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="4dp"
+        android:ems="10"
+        android:hint="Current Money $0.00"
+        android:inputType="text"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/addGoal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+
+</android.support.constraint.ConstraintLayout>
