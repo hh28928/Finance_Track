@@ -24,8 +24,8 @@ public class UserInformation {
         this.state = state;
         this.zip = zip;
         this.country = country;
-        this.budget = " ";
-        this.balance = " ";
+        this.budget = "0";
+        this.balance = "0";
     }
 
     public String getEmail() {

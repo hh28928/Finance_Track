@@ -20,12 +20,10 @@ import java.util.Map;
 public class WeeklySalaryActivity extends AppCompatActivity {
 
     EditText hours_et, rate_et, tax_et;
-    Button calculate_bt;
     TextView display;
-    private FirebaseAuth mAuth;
     private DatabaseReference databaseReference; // store data to firebase
     public String yearly;
-    public Map<String, Boolean> data = new HashMap<>();
+    String uidR;
 
 
     @Override
@@ -33,15 +31,13 @@ public class WeeklySalaryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weekly_salary);
 
-
-
         hours_et = findViewById(R.id.hours_worked);
         rate_et = findViewById(R.id.rate);
         tax_et = findViewById(R.id.percent);
 
         display = findViewById(R.id.display_tv);
 
-        //calculate_bt = (Button)findViewById(R.id.calculate);
+        uidR = getIntent().getExtras().getString("UID"); // Users Authentication
 
         }
 
@@ -65,8 +61,9 @@ public class WeeklySalaryActivity extends AppCompatActivity {
             display.setText("Your Calculated Weekly Salary is: " + weekly);
 
             final FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference data = database.getReference().child(mAuth.getUid()).child("budget");
+            DatabaseReference data = database.getReference().child(uidR).child("budget");
             data.setValue(weekly);
+            Toast.makeText(this, "Budget has been updated...", Toast.LENGTH_SHORT).show();
         }
 
     }
