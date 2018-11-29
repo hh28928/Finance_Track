@@ -63,10 +63,16 @@ public class SavingsTrackerActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface,int i){
                         if(changeAmount.getText().toString().equals("")){//Checking if the editText is Empty
-                            Toast.makeText(SavingsTrackerActivity.this,"Please enter a numerical value",Toast.LENGTH_LONG).show();
+                            Toast.makeText(SavingsTrackerActivity.this,"Please enter a numeric value",Toast.LENGTH_LONG).show();
                         }
                         else{
-                            holdGoal.setCurrentAmount(holdGoal.getCurrentAmount() + Float.parseFloat(changeAmount.getText().toString()));
+                            if(changeAmount.getText().toString().matches("^\\d*\\.?\\d*$")) {
+                                Toast.makeText(SavingsTrackerActivity.this, "The value you entered contained a non-numeric character", LENGTH_LONG).show();
+                                return;
+                            }
+                            else {
+                                holdGoal.setCurrentAmount(holdGoal.getCurrentAmount() + Float.parseFloat(changeAmount.getText().toString()));
+                            }
                         }
                         goalAdapter.notifyDataSetChanged();
                     }
@@ -76,14 +82,20 @@ public class SavingsTrackerActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface,int i){
                         if(changeAmount.getText().toString().equals("")){//Checking if the editText is Empty
-                            Toast.makeText(SavingsTrackerActivity.this,"Please enter a numerical value",Toast.LENGTH_LONG).show();
+                            Toast.makeText(SavingsTrackerActivity.this,"Please enter a numeric value",Toast.LENGTH_LONG).show();
                         }
                         else{
-                            if(Float.parseFloat(changeAmount.getText().toString()) > holdGoal.getCurrentAmount()){
-                                Toast.makeText(SavingsTrackerActivity.this,"The amount entered is larger than what has been saved towards the goal",Toast.LENGTH_LONG).show();
+                            if(changeAmount.getText().toString().matches("^\\d*\\.?\\d*$")) {
+                                Toast.makeText(SavingsTrackerActivity.this, "The value you entered contained a non-numeric character", LENGTH_LONG).show();
+                                return;
                             }
                             else{
-                                holdGoal.setCurrentAmount(holdGoal.getCurrentAmount() - Float.parseFloat(changeAmount.getText().toString()));
+                                if(Float.parseFloat(changeAmount.getText().toString()) > holdGoal.getCurrentAmount()){
+                                    Toast.makeText(SavingsTrackerActivity.this,"The amount entered is larger than what has been saved towards the goal",Toast.LENGTH_LONG).show();
+                                }
+                                else{
+                                    holdGoal.setCurrentAmount(holdGoal.getCurrentAmount() - Float.parseFloat(changeAmount.getText().toString()));
+                                }
                             }
                         }
                         goalAdapter.notifyDataSetChanged();
@@ -142,18 +154,23 @@ public class SavingsTrackerActivity extends AppCompatActivity {
                 return;
             }
             else {
-                goal holdGoal = new goal(Float.parseFloat(goal_et.getText().toString()), Float.parseFloat(current_et.getText().toString()), name_et.getText().toString());
-                if(holdGoal.getCurrentAmount() >= holdGoal.getGoalAmount()) {
-                    Toast.makeText(this, "The current amount you entered is equal to the goal amount, you don't need to make a goal", LENGTH_LONG).show();
+
+                if (!(goal_et.getText().toString().matches("^\\d*\\.?\\d*$")) && !(current_et.getText().toString().matches("^\\d*\\.?\\d*$"))) {//Checks if there are any non-float numbers in the goal and current fields
+                    Toast.makeText(this, "One of the numeric field values contains a non-numeric character", LENGTH_LONG).show();
+                    return;
+                } else {
+                    goal holdGoal = new goal(Float.parseFloat(goal_et.getText().toString()), Float.parseFloat(current_et.getText().toString()), name_et.getText().toString());
+                    if (holdGoal.getCurrentAmount() >= holdGoal.getGoalAmount()) {
+                        Toast.makeText(this, "The current amount you entered is equal to the goal amount, you don't need to make a goal", LENGTH_LONG).show();
+                    } else {
+                        theGoals.add(holdGoal);//Adds a new goal into the ArrayList, it should show up on the list UI
+                        goal_et.setText("");
+                        name_et.setText("");
+                        current_et.setText("");
+                    }
+                    goalAdapter.notifyDataSetChanged();
+                    return;
                 }
-                else {
-                    theGoals.add(holdGoal);//Adds a new goal into the ArrayList, it should show up on the list UI
-                    goal_et.setText("");
-                    name_et.setText("");
-                    current_et.setText("");
-                }
-                goalAdapter.notifyDataSetChanged();
-                return;
             }
         }
     }
