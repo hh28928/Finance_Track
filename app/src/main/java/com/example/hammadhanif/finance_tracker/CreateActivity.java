@@ -48,14 +48,14 @@ public class CreateActivity extends AppCompatActivity {
         ArrayList<Spaceprobe> spaceprobesList = new ArrayList<Spaceprobe>();
 
         spaceprobe.setName(stName);
-        spaceprobe.setAmountSpent(stAmount);
-        spaceprobe.setSalary("4400");
+        spaceprobe.setAmountSpent("$" + stAmount);
+        spaceprobe.setSalary("$" + "4400");
         salaryCopy = salaryCopy - Integer.valueOf(stAmount);
-        spaceprobe.setAmountRemaining(Integer.toString(salaryCopy));
+        spaceprobe.setAmountRemaining("$" + Integer.toString(salaryCopy));
         spaceprobesList.add(spaceprobe);
 
         createBudgetTables = new String[spaceprobesList.size()][4];
-        for (int i = ctr; i < spaceprobesList.size(); i++) {
+        for (int i = 0; i < spaceprobesList.size(); i++) {
             Spaceprobe s = spaceprobesList.get(i);
 
             createBudgetTables[i][0] = spaceprobe.getName();
