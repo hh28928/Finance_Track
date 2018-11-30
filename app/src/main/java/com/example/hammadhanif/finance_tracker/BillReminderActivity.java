@@ -22,6 +22,7 @@ public class BillReminderActivity extends AppCompatActivity {
     ListView listView;
     ArrayAdapter myAdapter;
     ArrayList<String> ToDO = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

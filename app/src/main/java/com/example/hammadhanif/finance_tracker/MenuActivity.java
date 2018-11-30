@@ -23,17 +23,11 @@ public class MenuActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private DatabaseReference databaseReference;
-    private Button logout;
-    TextView welcome;
-    Button bt_Budget;
-    Button salary;
-    Button savings;
-    String userID;
-    FirebaseUser user;
-
-    public String getUserID() {
-        return userID;
-    }
+    private TextView welcome;
+    private Button bt_Budget;
+    private Button salary;
+    private Button savings;
+    private String uidR;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +35,9 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.menu);
 
 
-        mAuth = FirebaseAuth.getInstance();
-        user = mAuth.getCurrentUser();
-        userID = user.getUid();
-        databaseReference = FirebaseDatabase.getInstance().getReference().child(userID);
+        uidR = getIntent().getExtras().getString("UID");
+
+        databaseReference = FirebaseDatabase.getInstance().getReference().child(uidR);
 
         // retriving from database
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -80,7 +73,7 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent sIntent = new Intent(MenuActivity.this, SalaryActivity.class);
-                sIntent.putExtra("UID", getUserID()); // Passes the Users Authentication to a class
+                sIntent.putExtra("UID", uidR); // Passes the Users Authentication to a class
                 startActivity(sIntent);
             }
         });
