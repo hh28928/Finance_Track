@@ -54,5 +54,13 @@ public class YearlySalaryActivity extends AppCompatActivity {
         }
     }
 
-
+    public String calcSalaryForTesting(String rate_w, String tax_w) {
+        Float rate_convert = Float.parseFloat(rate_w);
+        Float tax_convert = Float.parseFloat(tax_w);
+        Float tax = tax_convert / 100;
+        tax = tax * rate_convert;
+        Float total = rate_convert - tax;
+        String yearly = String.format("%.2f", total);
+        return yearly;
+    }
 }
