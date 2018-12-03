@@ -16,5 +16,29 @@ public class MonthlySalaryActivityTest {
         output = monthlySalaryActivity.calcSalaryForTesting(input_monthly, tax);
 
         assertEquals(expected, output);
+
+        System.out.println("Test1 " + true + " " + output);
+
+        input_monthly = "4000";
+        tax = "10";
+        expected = "3600.00";
+        MonthlySalaryActivity monthlySalaryActivity1 = new MonthlySalaryActivity();
+        output = monthlySalaryActivity1.calcSalaryForTesting(input_monthly, tax);
+
+        assertEquals(expected, output);
+
+        System.out.println("Test2 " + true + " " + output);
+
+        input_monthly = "0";
+        tax = "10";
+        expected = "0.00";
+        MonthlySalaryActivity monthlySalaryActivity2 = new MonthlySalaryActivity();
+        output = monthlySalaryActivity2.calcSalaryForTesting(input_monthly, tax);
+
+        assertEquals(expected, output);
+
+
+        System.out.println("Test3 " + true + " " + output);
+
     }
 }
