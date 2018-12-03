@@ -99,4 +99,16 @@ public class UserInformation {
     public void setBalance(String balance) {
         this.balance = balance;
     }
+
+    public String regTest(String email, String name, String street, String city, String state, String zip, String country) {
+        setEmail(email);
+        setName(name);
+        setStreet(street);
+        setCity(city);
+        setState(state);
+        setZip(zip);
+        setCountry(country);
+        return "" + getEmail() + "; " + getName() + ": " + getStreet() + " " + getCity() + ", " + getState() + " " + getZip() + " " + getCountry();
+
+    }
 }
