@@ -64,9 +64,17 @@ public class WeeklySalaryActivity extends AppCompatActivity {
             data.setValue(weekly);
             Toast.makeText(this, "Budget has been updated...", Toast.LENGTH_SHORT).show();
         }
-
     }
 
-
+    public String calcSalaryForTesting(String hours_w, String rate_w, String tax_w) {
+        Float hours_convert = Float.parseFloat(hours_w);
+        Float rate_convert = Float.parseFloat(rate_w);
+        Float tax_convert = Float.parseFloat(tax_w);
+        Float tax = tax_convert / 100;
+        tax = tax * hours_convert * rate_convert;
+        Float total = (hours_convert * rate_convert) - tax;
+        String weekly = String.format("%.2f", total);
+        return weekly;
+    }
 }
 
