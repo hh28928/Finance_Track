@@ -178,6 +178,46 @@ public class SavingsTrackerActivity extends AppCompatActivity {
         Intent backIntent = new Intent(this, MenuActivity.class);
         startActivity(backIntent);
     }
+
+    public void forAddGoalTest(String theName, String theGoal, String theCurrent){
+        //Uses strings instead of the edittexts, just makes sure they add properly or won't add if they don't meet the criteria
+        if(!theGoals.isEmpty()) {
+            Iterator<goal> goalIterator = theGoals.iterator();
+
+            while(goalIterator.hasNext()) {
+                //This loop is to make sure the goal name has not been used more than once
+                goal currentGoal = goalIterator.next();
+                if (currentGoal.goalName.equals(theName)) {
+                    //Toast.makeText(this, "This goal name has already been used, please choose another", LENGTH_LONG).show();
+                    return; //returns if the name has been used already
+                }
+            }
+        }
+        if (theName.equals("") || theGoal.equals("")||theCurrent.equals("")) {
+            //Toast.makeText(this, "At least one field is empty", LENGTH_LONG).show();
+            return;//Checks if either the goal amount or name field is empty
+        }
+        else {
+            if(theName.length() > 30) {//Checking the length of the goal name
+                //Toast.makeText(this, "The name of this goal is too long, it can only be thirty characters", LENGTH_LONG).show();
+                return;
+            }
+            else {
+                goal holdGoal = new goal(Float.parseFloat(theGoal), Float.parseFloat(theCurrent), theName);
+                if(holdGoal.getCurrentAmount() >= holdGoal.getGoalAmount()) {
+                    //Toast.makeText(this, "The current amount you entered is equal to the goal amount, you don't need to make a goal", LENGTH_LONG).show();
+                }
+                else {
+                    theGoals.add(holdGoal);//Adds a new goal into the ArrayList, it should show up on the list UI
+                    theGoal = ("");
+                    theName = ("");
+                    theCurrent = ("");
+                }
+                return;
+            }
+        }
+    }
+
 }
 
 
