@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText Username, Password;
     private TextView Info;
     private int counter = 5;
+    private String authUserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +41,6 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this);
-
-        FirebaseUser user = mAuth.getCurrentUser();
-
 
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,12 +102,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void checkEmailVerification(){
         FirebaseUser firebaseUser = mAuth.getInstance().getCurrentUser();
+        authUserId = firebaseUser.getUid();
         Boolean emailFlag = firebaseUser.isEmailVerified();
 
         if(emailFlag){
             Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
             finish();
-            startActivity(new Intent(MainActivity.this, MenuActivity.class));
+            Intent sIntent = new Intent(MainActivity.this, MenuActivity.class);
+            sIntent.putExtra("UID", authUserId); // Passes the Users Authentication to a class
+            startActivity(sIntent);
         }else{
             Toast.makeText(this, "Verify your email", Toast.LENGTH_SHORT).show();
             mAuth.signOut();

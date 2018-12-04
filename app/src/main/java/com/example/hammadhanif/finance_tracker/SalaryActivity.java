@@ -14,13 +14,11 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class SalaryActivity extends AppCompatActivity {
 
-    private FirebaseAuth mAuth;
     private Button next_bt;
-    private Button back;
     private RadioButton rb;
-    private TextView rate;
     private RadioGroup radioGroup;
-    String uidR;
+    private String uidR;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
